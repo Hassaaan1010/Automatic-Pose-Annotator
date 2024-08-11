@@ -1,0 +1,123 @@
+traverse through images in allFinal
+
+count = number of photos
+nextImagePointer = count+1
+
+for each image, apply person detection.
+    if 1 persons:
+        newDataset/nextImagePointer.png
+        nextImagePointer+1
+
+
+    if 2 persons:
+        extract bbox1, bbox2
+
+        bbox1 -> nextImagePointer.png
+        nextImagePointer +1
+
+        bbox2 -> nextImagePointer.png
+        nextImagePointer +1
+
+        original png
+
+
+if 0 person:
+    skip image
+
+
+if 1 person:
+    business as usual
+
+
+if 2 person:
+
+    check overlap() return number of overlapping corners
+
+    if no overlap or small over lap of 15% bbox size:
+        // divide image from center of left images' right most point and right images' left most point
+
+        sort  bboxes by x starting x coordinate
+
+        if bbox1 above bbox2:
+            (y3 + b1 / 2) is  mid line
+        else bbox1 is beside bbox2:
+            (x2 + a1 / 2) is mid line
+        
+    
+      
+    if box1 in box2 or box2 in box1:
+        larger box only considered.
+
+    if corner overlap:
+        if small corner overlap
+            split image vertically from mid point of vertial edges
+            
+        if large corner overlap:
+            sort bboxes by x:
+            
+            image1
+            
+
+
+    if edge overlap:
+
+        while False:
+            if small  horizontal edge overlap
+                horizontally split image from mid point of edges
+
+            if small vertical edge overlap:
+                vertically split image from mid point of edges
+                
+            if large vertical edge overlap:
+                main bbox = max(confidence)
+                image = overlapping corner to opposite end of image.
+                
+            if large horizontal edge overlap:
+                main bbox = max(confidence)
+                image = overlapping corner to opposite end of image.
+        
+        if overlap area is small percentage of bbox1 or bbox2:
+            if horizontal overlap:
+                find mid of closest Ys
+                split horizontally
+
+            if vertical overlap:
+                find mid of closes Xs
+                split vertically
+
+        elif overlap area is significant
+            section = section with max confidence
+            
+
+
+
+
+
+
+
+
+
+
+
+
+    if one corner of bbox1 in bbox2:
+
+
+if multiple people but 1 huge:
+    if no overlap:
+        if other people are less than 30% area of larges bbox:
+            max area person remains. all else blured out.
+        
+        else:
+            save bbox individually
+
+    if small overlap:
+        save bbox individually
+    
+    if large overlap:
+        skip image
+
+         
+    
+    
+    

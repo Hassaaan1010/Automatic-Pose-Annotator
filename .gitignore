@@ -1,3 +1,9 @@
+# Ignore the following folders
+./auto_training/models/
+./auto_training/multi_people_splitting/models/
+./auto_training/multi_people_splitting/images1/
+./multi_people_splitting/models/
+./multi_people_splitting/images1/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
