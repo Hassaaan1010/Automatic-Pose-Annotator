@@ -1,0 +1,64 @@
+# Data set split as follows in dataset directory
+# .
+# ├── images
+# │   ├── test
+# │   ├── train
+# │   └── val
+# └── labels
+#     ├── test
+#     ├── train
+#     └── val
+
+# Dataset paths
+path: /content/gdrive/MyDrive/...path to dataset .../dataset_2.1/
+train: images/train
+val: images/val
+test: images/test
+
+# Number of classes
+nc: 1
+
+# Class names
+names: ["person"]
+
+# Define keypoints for human pose detection
+keypoints:
+  - nose
+  - left_eye
+  - right_eye
+  - left_ear
+  - right_ear
+  - left_shoulder
+  - right_shoulder
+  - left_elbow
+  - right_elbow
+  - left_wrist
+  - right_wrist
+  - left_hip
+  - right_hip
+  - left_knee
+  - right_knee
+  - left_ankle
+  - right_ankle
+
+kpt_shape: [17, 3]
+
+# Augmentations 1
+#augmentations:
+#  - flipud: 0.5
+#  - rotate: 10.0
+#  - scale: 0.5
+#  - shear: 5.0
+#  - translate: 0.1
+
+# did not include flip fliplr augmentation because left and right are often indifferentiable in DPT depth maps
+# augmentations for last 40 epochs
+augmentations:
+  - mosaic: 0.3 # important to avoid overfitting on centered bboxes
+  - flipud: 0.2 # Lower probability of vertical flip (20%)
+  - rotate: 5.0 # Reduced rotation to +/- 5 degrees
+  - scale: 0.3 # Smaller scaling range for less drastic zoom
+  - shear: 3.0 # Reduced shearing to avoid extreme image warping
+  - translate: 0.05 # Reduced translation to avoid moving objects too far
+  - random_crop: 0.7
+  - random_translate: 0.5 # Updated to 0.5

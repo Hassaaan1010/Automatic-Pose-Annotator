@@ -1,0 +1,51 @@
+
+average_depth.py
+    fn average_depth
+    - for eliminating people too far in the background or people standing too close to a background wall.
+
+    fn bbox1_closer_than_bbox2
+    - for instances with two people with one in front of another, returns bbox with the person standing closer to camera and doesnt have obstructed depthmap of body
+
+
+
+check_overlap.py
+    fn check_overlap_for_2
+    - takes 2 bboxes as parameters and returns overlaping area. Used in box_splitting for checking significant overlap.
+
+object_detection.py
+    fn object_detection
+    - applies object_detection and returns relevant bboxes.
+    - returns at most 4 bboxes.
+    - filters out people whose bbox is smaller than 35000px.
+    - filters out people who are obstructed by other people.
+    - uses cv2 inpaint to blur out irrelevant people bboxes. (Important for automatic pose annotation. Works better than Gaussian blur or plain segment masks)
+    - From main_1.ipynb, segment model is passed for object_detection because of better bbox identification. yolov8m.pt for object detection detects people but the bbox doesnt always cover the entrire person.
+    - returns array of bboxes
+
+
+blur_bbox.py (functions not used. Previous versions of main_1 and object_detection required it)
+    fn blur_bbox
+    - returns Gaussian blurred bbox
+
+    fn blur_instance_segment
+    - returns blurred mask of person segment. (does not prevent pose detection. Hence not used anymore)
+
+
+
+box_splitting.py
+fn split_people_bboxes
+- takes bboxes array, confs, rgb images, depth maps
+- prints type of case in image. eg : CASE 2.2.1 = 2 people, significant obstruction, returns closer bbox
+
+- can handle max 4 people bboxes as aquired from object_detection
+- for each pair of image, dpt map
+    - for single bbox returns rgb, dpt as it is.
+
+    - for 2 people without significant overlap, splits rgb, dpt from center of overlap
+    - for 2 people with significant overlap, returns only the person closer to camera...
+
+    - for 3,4 people, returns all bboxes without much overlap. Can have multiple CASEs to be true
+
+    - for cases with no valid bboxes, returns empty array, rgb and depth map are skipped.
+- rgb and depth maps are cut accordingly and returned
+

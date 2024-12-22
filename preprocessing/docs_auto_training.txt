@@ -1,0 +1,12 @@
+Main annotations annotating program.
+Returns yolo format normalized annotations for each rgb img and stores labels in corresponding .txt file in labels
+
+prerequisites:
+    running main_1.ipynb on all rgb, dpt pairs
+    scan for possible misidentification of objects as human.
+
+    
+STEPS
+    - define rgb and labels folder path
+    - choose models. default : v8m
+    - run cells

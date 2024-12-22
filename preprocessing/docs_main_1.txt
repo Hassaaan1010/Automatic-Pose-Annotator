@@ -1,0 +1,41 @@
+
+Working of main_1
+
+Prerequisites:
+    - Rgb footage or images converted to DPT depth maps
+    - prune unusable dpt maps using pruner.ipynb
+    - numbered (can use numbering_script.sh) with corresponding rgb images
+    - resized depth map to be same size as corresponding rgb image
+    rgb images: RGBpath/0.png, 1.png...
+    dpt images: DPTpath/0.png, 1.png...
+
+
+STEPS: 
+- declaration of paths
+    - input rgb source folder
+    - input dpt depth maps source folder
+    
+    - output dpt split images folder
+    - output rgb split images folder
+
+- Declare variable for all rgb image source paths
+
+- imports object detection, segmentation and pose detection models
+
+- import object_detection function and split_people_bboxes fn
+
+MAIN:
+    for file number in rbg files list (itterates through 0.png to <goal>.png)
+        - defines rgb, dpt image path
+        - reads rgb, dpt image
+        
+        - applies object_detection to get modified rgb image with inpaintings, bboxes array, confs array
+        
+        - passes bboxes, confs, rgb image, depth map to split_people_bboxes and recieves cut out of rgb and dpt images.
+
+        rgb and depth maps are written as numbered files into corresponding destination folders
+
+
+NOTE: incase of error during for loop, redefine INDEX and GOAL path appropriately to continue from next image. Logs will print out last successfully processed image index, file number etc, CASE, bboxes etc.
+
+

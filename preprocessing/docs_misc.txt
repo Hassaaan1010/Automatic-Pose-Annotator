@@ -1,0 +1,28 @@
+MISC FILES
+
+imageResizer.ipynb
+// DPT conversion can output very large images so this program can resize all images in a folder
+- Input and Output folder must be different and input folder must only have relevant image files
+-resizes all images to usable size ~1920 max length or breadth
+
+numbering_script.sh
+// used for numbering all image files in a folder from 0.
+- input and output folder paths must be declared. 
+- Check if counter=10000 can cause overwrite issues with pre-existing files.
+
+pruner.ipynb
+// program with cv2 interface for manually pruning images with backup.
+- input source folder path
+- create folders for delete, ambiguous and ok images and assign path.
+
+test_object_detection.ipynb
+-define path to image and test object detection bbox, confidence 
+
+test_pose_detection.ipynb
+-define path to image and obtain pose keypoints with confidence
+
+jupyter_note_book_combiner.py
+- define notebook_name variable with ipynb file path
+- returns .py file with same name.
+
+
